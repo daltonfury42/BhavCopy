@@ -19,13 +19,14 @@ def fetch_bhav(date=None):
     with request.urlopen(url) as response:
         z = zipfile.ZipFile(io.BytesIO(response.read()))
 
-    csv_file_name = 'EQ%s.CSV' % date.strftime('%d%m%y')
-    read_csv(csv_file_name, z)
+    read_csv(z, date)
 
 
-def read_csv(fileName, z):
+def read_csv(z, date):
 
-    csv_file = z.open(fileName)
+    file_name = 'EQ%s.CSV' % date.strftime('%d%m%y')
+
+    csv_file = z.open(file_name)
     csv_file = io.TextIOWrapper(csv_file)
     csv_reader = csv.reader(csv_file, delimiter=',')
 
@@ -41,6 +42,12 @@ def read_csv(fileName, z):
         low = float(row[header.LOW.value])
         close = float(row[header.CLOSE.value])
 
-        data.append(model.Equity(code, name, open, high, low, close))
+        data.append(model.Equity(code=code,
+                                 name=name,
+                                 open=open,
+                                 high=high,
+                                 low=low,
+                                 close=close,
+                                 date=date))
 
     return data

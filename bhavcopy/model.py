@@ -1,5 +1,5 @@
 class Equity:
-    def __init__(self, code, name, open, high, low, close):
+    def __init__(self, code, name, open, high, low, close, date):
 
         self.code = code
         self.name = name
@@ -7,3 +7,5 @@ class Equity:
         self.high = high
         self.low = low
         self.close = close
+
+        self.date = date

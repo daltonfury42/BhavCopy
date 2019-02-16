@@ -11,7 +11,7 @@ class SecurityDAO:
 
     def insert_equity(self, equity):
 
-        key = 'equity:' + equity.name
+        key = 'equity:' + equity.name + ':' + equity.date.strftime('%d%m%y')
 
         self.db.hset(key, 'code', equity.code)
         self.db.hset(key, 'open', equity.open)
@@ -19,9 +19,9 @@ class SecurityDAO:
         self.db.hset(key, 'low', equity.low)
         self.db.hset(key, 'close', equity.close)
 
-    def get_equity_by_name(self, name):
+    def get_equity_by_name_date(self, name, date):
 
-        key = 'equity:' + name
+        key = 'equity:' + name + ':' + date.strftime('%d%m%y')
 
         hashval = self.db.hgetall(key)
 
