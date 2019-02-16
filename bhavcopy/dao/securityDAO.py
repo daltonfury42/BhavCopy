@@ -25,9 +25,12 @@ class SecurityDAO:
 
         hashval = self.db.hgetall(key)
 
-        return model.Equity(code=int(hashval['code']),
-                            name=hashval['name'],
-                            open=float(hashval['open']),
-                            high=float(hashval['high']),
-                            low=float(hashval['low']),
-                            close=float(hashval['close']))
+        if hashval == {}:
+            return None
+        else:
+            return model.Equity(code=int(hashval['code']),
+                                name=hashval['name'],
+                                open=float(hashval['open']),
+                                high=float(hashval['high']),
+                                low=float(hashval['low']),
+                                close=float(hashval['close']))
