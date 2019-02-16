@@ -8,5 +8,7 @@ setup(name='bhavcopy',
       author_email='daltonfury42@disroot.org',
       license='MIT',
       packages=['bhavcopy'],
-      install_requires=[],
+      install_requires=[
+          'redis'
+      ],
       zip_safe=False)
