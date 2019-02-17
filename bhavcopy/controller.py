@@ -13,15 +13,23 @@ class BhavController(object):
     )
 
     @cherrypy.expose
-    def index(self, row_size=10):
-        template = self.jinja.get_template('index_old.html')
+    def index(self, row_size=10, date_str=None):
+
+        if date_str is None:
+            date = datetime.today()
+        else:
+            date = datetime.strptime(date_str, '%d%m%y')
+
+        date_text = date.strftime('%d, %B %Y')
+
+        template = self.jinja.get_template('index.html')
 
         try:
             equities = securityDAO.SecurityDAO().get_equities()
         except securityDAO.RedisDataNotFoundException:
             raise cherrypy.HTTPError(message="Data not found in database")
 
-        return template.render(equities=equities[:10])
+        return template.render(equities=equities[:row_size], date=date_text)
 
     @cherrypy.expose
     def update(self, date_str=None):
