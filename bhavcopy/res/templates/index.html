@@ -83,7 +83,7 @@
           <tbody>
             {% for eq in equities %}
             <tr>
-              <td>{{ eq.code }}</td>
+		    <td><a href='/detail?name={{ eq. name }}'>{{ eq.code }}</a></td>
               <td>{{ eq.name }}</td>
               <td>{{ eq.open }}</td>
               <td>{{ eq.high }}</td>
