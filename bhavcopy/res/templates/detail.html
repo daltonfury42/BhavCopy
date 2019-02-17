@@ -60,21 +60,19 @@
 
 
 <div class="landing-sections text-center landing-screen">
-	<h2 class="text-center">BSE Bhav Copy</h2>
+	<h2 class="text-center">Detailed Information for {{ equities[0].name }} ({{ equities[0].code }})</h2>
 
   <div class="mini-container">
-	  <p class="text-grey">BSE India publishes Bhav Copy data after every trading day. Here is the  details of
-		open price, high price, low, and close of top 10 stocks traded on the exchange on {{ date }}.</p>
-	  <br>
+	  	  <div>
 		  <form action="/detail">
-			  <div><input type="text" name="name" placeholder="Which stock are you interested in?"></div>
-			  <div><input type="submit" value="Search"></div>
+			  <input type="text" name="name" placeholder="{{ equities[0].name }}">
+			  <input type="submit" value="Search">
 		  </form>
+	  </div>
 			<table id="hor-minimalist-b" summary="Latest Bhav Copy">
 		<thead>
 			<tr>
-				<th scope="col">Code</th>
-				<th scope="col">Name</th>
+				<th scope="col">Date</th>
 				<th scope="col">Open</th>
 				<th scope="col">High</th>
 				<th scope="col">Low</th>
@@ -84,8 +82,7 @@
 		<tbody>
 		{% for eq in equities %}
 			<tr>
-				<td>{{ eq.code }}</td>
-				<td>{{ eq.name }}</td>
+				<td>{{ eq.date }}</td>
 				<td>{{ eq.open }}</td>
 				<td>{{ eq.high }}</td>
 				<td>{{ eq.low }}</td>
@@ -94,6 +91,7 @@
 		{% endfor %}
 		</tbody>
 	</table>
+	  <form action="/"><input type="submit" value="Go Back"></form>
   </div>
 </div>
 
