@@ -67,6 +67,7 @@
 		  <form action="/detail">
 			  <input type="text" name="name" placeholder="{{ equities[0].name }}" required>
 			  <input type="submit" value="Search">
+			  <input type="button" onclick="location.href='/';" value="Go Back" />
 		  </form>
 	  </div>
 			<table id="hor-minimalist-b" summary="Latest Bhav Copy">
@@ -91,7 +92,6 @@
 		{% endfor %}
 		</tbody>
 	</table>
-	  <form action="/"><input type="submit" value="Go Back"></form>
   </div>
 </div>
 
