@@ -10,3 +10,7 @@
 .idea/
 
 *.CSV
+
+build/
+
+site.log
