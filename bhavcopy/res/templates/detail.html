@@ -65,7 +65,7 @@
   <div class="mini-container">
 	  	  <div>
 		  <form action="/detail">
-			  <input type="text" name="name" placeholder="{{ equities[0].name }}">
+			  <input type="text" name="name" placeholder="{{ equities[0].name }}" required>
 			  <input type="submit" value="Search">
 		  </form>
 	  </div>
@@ -82,7 +82,7 @@
 		<tbody>
 		{% for eq in equities %}
 			<tr>
-				<td>{{ eq.date }}</td>
+				<td>{{ eq.date.strftime('%d-%m-%Y')  }}</td>
 				<td>{{ eq.open }}</td>
 				<td>{{ eq.high }}</td>
 				<td>{{ eq.low }}</td>
