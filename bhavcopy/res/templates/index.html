@@ -63,6 +63,10 @@
           <div><input type="text" name="name" placeholder="Which stock are you interested in?" required></div>
           <div><input type="submit" value="Search"></div>
         </form>
+
+				{% if error != None %}
+				<p style="color: red;">{{ error }}</p>
+				{% endif %}
 			</div>
 			<div class="table-section">
         		<table style="align:center;" id="hor-minimalist-b" summary="Latest Bhav Copy">
