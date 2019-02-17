@@ -1,4 +1,5 @@
 import cherrypy
+import re
 import jinja2
 from datetime import datetime
 
@@ -36,6 +37,9 @@ class BhavController(object):
     def detail(self, name, row_size=10):
 
         name = name.upper()
+        if re.search(r'[^A-Z .&-]', name) is not None:
+            return self.index(error="Illegal stock name %s." % name)
+
 
         try:
             equities = securityDAO.SecurityDAO().get_equities(name=name)
