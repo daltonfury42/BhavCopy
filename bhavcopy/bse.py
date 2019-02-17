@@ -4,22 +4,26 @@ import zipfile
 from datetime import datetime, timedelta
 import enum
 from itertools import count
-from urllib import request
+from urllib import request, error
 
 from bhavcopy import model
 
 
-def fetch_bhav(date=None):
-    if not date:
-        date = datetime.today() - timedelta(1)
+class BhavNotFoundException(BaseException):
+    pass
 
+
+def fetch_bhav(date):
     url = 'https://www.bseindia.com/download/BhavCopy/Equity/EQ%s_CSV.ZIP' % date.strftime('%d%m%y')
     # Doesn't work midnight
 
-    with request.urlopen(url) as response:
-        z = zipfile.ZipFile(io.BytesIO(response.read()))
+    try:
+        with request.urlopen(url) as response:
+            z = zipfile.ZipFile(io.BytesIO(response.read()))
+    except error.HTTPError as e:
+        raise BhavNotFoundException
 
-    read_csv(z, date)
+    return read_csv(z, date)
 
 
 def read_csv(z, date):

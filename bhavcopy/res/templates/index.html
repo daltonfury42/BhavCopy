@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Zerodha - Bhav Copy Report</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="static/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/table.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+<nav id="nav2" class="navbar">
+	<div class="row container nav-responsive">
+		<div class="three columns relative-section">
+			<a href="/">
+				<img src="/static/images/logo.svg" alt="" />
+			</a>
+		</div>
+		<div class="nine columns nav-active">
+			<ul class="navbar-links">
+				<li class="hide-on-small">
+					<a id="nav_acop" href="/open-account">Open an account</a>
+				</li>
+				<li class="hide-on-small">
+					<a href="/about">About</a>
+				</li>
+				<li class="hide-on-small">
+					<a href="/products">Products</a>
+				</li>
+				<li class="hide-on-small">
+					<a href="/pricing">Pricing</a>
+				</li>
+				<li class="hide-on-small">
+					<a href="https://support.zerodha.com">Support</a>
+				</li>
+			</ul>
+		</div><!-- nav items //-->
+	</div>
+</nav>
+
+
+<div class="landing-sections">
+
+
+	<table id="hor-minimalist-b" summary="Employee Pay Sheet">
+    <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Open</th>
+            <th scope="col">High</th>
+			<th scope="col">Low</th>
+			<th scope="col">Close</th>
+        </tr>
+    </thead>
+    <tbody>
+	{% for eq in equities %}
+        <tr>
+            <td>{{ eq.code }}</td>
+			<td>{{ eq.name }}</td>
+			<td>{{ eq.open }}</td>
+			<td>{{ eq.high }}</td>
+			<td>{{ eq.low }}</td>
+			<td>{{ eq.close }}</td>
+        </tr>
+	{% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+<!--===============================================================================================-->	
+	<script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/bootstrap/js/popper.js"></script>
+	<script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/js/main.js"></script>
+
+</body>
+</html>

@@ -1,6 +1,12 @@
+from datetime import datetime
+
 import redis
 
 from bhavcopy import model
+
+
+class RedisDataNotFoundException(BaseException):
+    pass
 
 
 class SecurityDAO:
@@ -19,18 +25,32 @@ class SecurityDAO:
         self.db.hset(key, 'low', equity.low)
         self.db.hset(key, 'close', equity.close)
 
-    def get_equity_by_name_date(self, name, date):
-
-        key = 'equity:' + name + ':' + date.strftime('%d%m%y')
-
-        hashval = self.db.hgetall(key)
-
-        if hashval == {}:
-            return None
+    def get_equities(self, name='*', date=None):
+        if date is None:
+            query = 'equity:' + name + ':*'
         else:
-            return model.Equity(code=int(hashval['code']),
-                                name=hashval['name'],
-                                open=float(hashval['open']),
-                                high=float(hashval['high']),
-                                low=float(hashval['low']),
-                                close=float(hashval['close']))
+            query = 'equity:' + name + ':' + date.strftime('%d%m%y')
+
+        keys = self.db.keys(query)
+
+        if not keys:
+            raise RedisDataNotFoundException
+
+        equities = []
+
+        for key in keys:
+            hashval = self.db.hgetall(key)
+
+            name, date = key.split(':')[1], datetime.strptime(key.split(':')[2], '%d%m%y')
+
+            equity = model.Equity(code=int(hashval['code']),
+                                  name=name,
+                                  open=float(hashval['open']),
+                                  high=float(hashval['high']),
+                                  low=float(hashval['low']),
+                                  close=float(hashval['close']),
+                                  date=date)
+
+            equities.append(equity)
+
+        return equities
