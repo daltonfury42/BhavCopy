@@ -13,7 +13,9 @@ class BhavController(object):
     )
 
     @cherrypy.expose
-    def index(self, row_size=10, date_str=None, error=None):
+    def index(self, row_size=10, date_str='150219', error=None):
+        #ToDo: CUrrently date_str defaults to 15-Feb. Should actually be the
+        #last BSE working day for which data is awailable.
 
         if date_str is None:
             date = datetime.today()
@@ -23,7 +25,7 @@ class BhavController(object):
         date_text = date.strftime('%d, %B %Y')
 
         try:
-            equities = securityDAO.SecurityDAO().get_equities() #ToDo change to date
+            equities = securityDAO.SecurityDAO().get_equities(date=date)
         except securityDAO.RedisDataNotFoundException:
             raise cherrypy.HTTPError(message="Data not found in database")
 
@@ -36,6 +38,8 @@ class BhavController(object):
             equities = securityDAO.SecurityDAO().get_equities(name=name)
         except securityDAO.RedisDataNotFoundException:
             return self.index(error=name + " was not found in our database. Please search for a different name.")
+
+        equities.sort(key=lambda eq: eq.date, reverse=True)
 
         template = self.jinja.get_template('detail.html')
         return template.render(equities=equities[:row_size])
