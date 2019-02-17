@@ -55,14 +55,14 @@
       <div class="mini-container">
 		  <div class="table-search-container">
 			  <div class="search-section">
+	<p class="text-grey" style="text-align:justify;">Historical Bhav Copy data of {{ equities[0].name }} over 
+	the last {{ equities|length }} days.</p>
+	<br><br>
         <form action="/detail">
           <input type="text" name="name" placeholder="{{ equities[0].name }}" required>
           <input type="submit" value="Search">
           <input type="button" onclick="location.href='/';" value="Go Back" />
         </form>
-	<br><br>
-	<p class="text-grey" style="text-align:justify;">Historical Bhav Copy data of {{ equities[0].name }} over 
-	the last {{ equities|length }} days.</p>
 			  </div><div class="table-section">
         <table id="hor-minimalist-b" summary="Latest Bhav Copy">
           <thead>
