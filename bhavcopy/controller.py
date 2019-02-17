@@ -34,6 +34,9 @@ class BhavController(object):
 
     @cherrypy.expose
     def detail(self, name, row_size=10):
+
+        name = name.upper()
+
         try:
             equities = securityDAO.SecurityDAO().get_equities(name=name)
         except securityDAO.RedisDataNotFoundException:
