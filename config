@@ -1,0 +1,12 @@
+[global]
+server.socket_host: '0.0.0.0'
+server.socket_port: 80
+log.error_file: 'site.log'
+
+[/]
+tools.sessions.on = True
+tools.staticdir.root = '/home/ubuntu/BhavCopy/bhavcopy/res/'
+
+[/static]
+tools.staticdir.on = True,
+tools.staticdir.dir = 'static'
