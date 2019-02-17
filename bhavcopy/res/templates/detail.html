@@ -51,29 +51,20 @@
       </div>
     </nav>
     <div class="landing-sections text-center landing-screen">
-      <h2 class="text-center">BSE Bhav Copy</h2>
+      <h2 class="text-center">Detailed Information for {{ equities[0].name }} ({{ equities[0].code }})</h2>
       <div class="mini-container">
-		<div class="table-search-container">
-			<div class="search-section">
-			<p class="text-grey" style="text-align:justify;">BSE India publishes Bhav Copy data after every trading day. Here is the  details of
-          open price, high price, low, and close of top 10 stocks traded on the exchange on {{ date }}.
-        </p>
-        	<br>
-        	<form action="/detail">
-          <div><input type="text" name="name" placeholder="Which stock are you interested in?" required></div>
-          <div><input type="submit" value="Search"></div>
+		  <div class="table-search-container">
+			  <div class="search-section">
+        <form action="/detail">
+          <input type="text" name="name" placeholder="{{ equities[0].name }}" required>
+          <input type="submit" value="Search">
+          <input type="button" onclick="location.href='/';" value="Go Back" />
         </form>
-
-				{% if error != None %}
-				<p style="color: red;">{{ error }}</p>
-				{% endif %}
-			</div>
-			<div class="table-section">
-        		<table style="align:center;" id="hor-minimalist-b" summary="Latest Bhav Copy">
+			  </div><div class="table-section">
+        <table id="hor-minimalist-b" summary="Latest Bhav Copy">
           <thead>
             <tr>
-              <th scope="col">Code</th>
-              <th scope="col">Name</th>
+              <th scope="col">Date</th>
               <th scope="col">Open</th>
               <th scope="col">High</th>
               <th scope="col">Low</th>
@@ -83,8 +74,7 @@
           <tbody>
             {% for eq in equities %}
             <tr>
-              <td>{{ eq.code }}</td>
-              <td>{{ eq.name }}</td>
+              <td>{{ eq.date.strftime('%d-%m-%Y')  }}</td>
               <td>{{ eq.open }}</td>
               <td>{{ eq.high }}</td>
               <td>{{ eq.low }}</td>
@@ -93,9 +83,8 @@
             {% endfor %}
           </tbody>
         </table>
-			</div>
-		</div>
-	  </div>
+			  </div></div>
+      </div>
     </div>
     <footer id="footer">
       <div class="container">

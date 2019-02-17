@@ -914,7 +914,7 @@ input[type="password"] {
 }
 
 .mini-container {
-  max-width: 850px !important;
+  max-width: 1050px !important;
   margin-left: auto;
   margin-right: auto;
   padding: 0px 20px
@@ -8708,3 +8708,14 @@ div#right-part {
 }
 
 
+.table-search-container {
+    display:flex;
+}
+
+.search-section {
+    padding:2%;
+}
+
+.table-section {
+    padding:3%;
+}
