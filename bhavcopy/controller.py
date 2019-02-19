@@ -23,7 +23,7 @@ class BhavController(object):
         date_text = date.strftime('%d, %B %Y')
 
         try:
-            equities = securityDAO.SecurityDAO().get_equities() #ToDo change to date
+            equities = securityDAO.SecurityDAO().get_equities(date=date)
         except securityDAO.RedisDataNotFoundException:
             raise cherrypy.HTTPError(message="Data not found in database")
 
@@ -35,7 +35,7 @@ class BhavController(object):
         try:
             equities = securityDAO.SecurityDAO().get_equities(name=name)
         except securityDAO.RedisDataNotFoundException:
-            return self.index(error=name + " was not found in our database. Please search for a different name.")
+            return self.index(error=name + " was not found in our database. Please search for a different name. ")
 
         template = self.jinja.get_template('detail.html')
         return template.render(equities=equities[:row_size])
